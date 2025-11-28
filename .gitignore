@@ -1,0 +1,11 @@
+# Build artifacts
+output/
+*.o
+main
+
+# Generated data files
+*.txt
+
+# System files
+.DS_Store
+Thumbs.db
