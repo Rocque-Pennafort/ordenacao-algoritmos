@@ -6,6 +6,10 @@
 #include "../include/insertion_sort.h"
 #include "../include/selection_sort.h"
 #include "../include/shell_sort.h"
+#include "../include/quick_sort.h"
+#include "../include/merge_sort.h"
+#include "../include/heap_sort.h"
+#include "../include/radix_sort.h"
 #include "../include/sorting_algorithms.h"
 
 // Function to clear input buffer
@@ -32,7 +36,11 @@ void displayMainMenu() {
     printf("3. Ler arquivo e ordenar com Insertion Sort\n");
     printf("4. Ler arquivo e ordenar com Selection Sort\n");
     printf("5. Ler arquivo e ordenar com Shell Sort\n");
-    printf("6. Comparar algoritmos\n");
+    printf("6. Ler arquivo e ordenar com Quick Sort\n");
+    printf("7. Ler arquivo e ordenar com Merge Sort\n");
+    printf("8. Ler arquivo e ordenar com Heap Sort\n");
+    printf("9. Ler arquivo e ordenar com Radix Sort\n");
+    printf("10. Comparar algoritmos\n");
     printf("0. Sair\n");
     printf("Escolha uma opcao: ");
 }
@@ -136,6 +144,34 @@ void handleSorting(int algorithm) {
         printf("Tempo de execucao: %.7f segundos\n", result.executionTime);
         printf("Comparacoes: %d\n", result.comparisons);
         printf("Trocas: %d\n", result.swaps);
+    } else if (algorithm == 5) {
+        printf("\nExecutando Quick Sort...\n");
+        QuickSortResult result = quickSort(sortArr, size);
+        printf("Ordenacao concluida!\n");
+        printf("Tempo de execucao: %.7f segundos\n", result.executionTime);
+        printf("Comparacoes: %d\n", result.comparisons);
+        printf("Trocas: %d\n", result.swaps);
+    } else if (algorithm == 6) {
+        printf("\nExecutando Merge Sort...\n");
+        MergeSortResult result = mergeSort(sortArr, size);
+        printf("Ordenacao concluida!\n");
+        printf("Tempo de execucao: %.7f segundos\n", result.executionTime);
+        printf("Comparacoes: %d\n", result.comparisons);
+        printf("Trocas: %d\n", result.swaps);
+    } else if (algorithm == 7) {
+        printf("\nExecutando Heap Sort...\n");
+        HeapSortResult result = heapSort(sortArr, size);
+        printf("Ordenacao concluida!\n");
+        printf("Tempo de execucao: %.7f segundos\n", result.executionTime);
+        printf("Comparacoes: %d\n", result.comparisons);
+        printf("Trocas: %d\n", result.swaps);
+    } else if (algorithm == 8) {
+        printf("\nExecutando Radix Sort...\n");
+        RadixSortResult result = radixSort(sortArr, size);
+        printf("Ordenacao concluida!\n");
+        printf("Tempo de execucao: %.7f segundos\n", result.executionTime);
+        printf("Comparacoes: %d\n", result.comparisons);
+        printf("Trocas: %d\n", result.swaps);
     }
     
     printf("Primeiros elementos ordenados: ");
@@ -167,12 +203,20 @@ void compareAlgorithms() {
     int* insertionArr = (int*)malloc(size * sizeof(int));
     int* selectionArr = (int*)malloc(size * sizeof(int));
     int* shellArr = (int*)malloc(size * sizeof(int));
+    int* quickArr = (int*)malloc(size * sizeof(int));
+    int* mergeArr = (int*)malloc(size * sizeof(int));
+    int* heapArr = (int*)malloc(size * sizeof(int));
+    int* radixArr = (int*)malloc(size * sizeof(int));
     
     for (int i = 0; i < size; i++) {
         bubbleArr[i] = arr[i];
         insertionArr[i] = arr[i];
         selectionArr[i] = arr[i];
         shellArr[i] = arr[i];
+        quickArr[i] = arr[i];
+        mergeArr[i] = arr[i];
+        heapArr[i] = arr[i];
+        radixArr[i] = arr[i];
     }
     
     printf("\n=== COMPARACAO DE ALGORITMOS ===\n");
@@ -192,6 +236,22 @@ void compareAlgorithms() {
     // Test Shell Sort
     printf("Testando Shell Sort...\n");
     ShellSortResult shellResult = shellSort(shellArr, size);
+
+    // Test Quick Sort
+    printf("Testando Quick Sort...\n");
+    QuickSortResult quickResult = quickSort(quickArr, size);
+
+    // Test Merge Sort
+    printf("Testando Merge Sort...\n");
+    MergeSortResult mergeResult = mergeSort(mergeArr, size);
+
+    // Test Heap Sort
+    printf("Testando Heap Sort...\n");
+    HeapSortResult heapResult = heapSort(heapArr, size);
+
+    // Test Radix Sort
+    printf("Testando Radix Sort...\n");
+    RadixSortResult radixResult = radixSort(radixArr, size);
     
     // Display comparison results
     printf("\n=== RESULTADOS DA COMPARACAO ===\n");
@@ -210,12 +270,32 @@ void compareAlgorithms() {
     printf("Shell Sort:\n");
     printf("  Tempo: %.7f s | Comp: %d | Trocas: %d\n", 
            shellResult.executionTime, shellResult.comparisons, shellResult.swaps);
+
+    printf("Quick Sort:\n");
+    printf("  Tempo: %.7f s | Comp: %d | Trocas: %d\n", 
+           quickResult.executionTime, quickResult.comparisons, quickResult.swaps);
+
+    printf("Merge Sort:\n");
+    printf("  Tempo: %.7f s | Comp: %d | Trocas: %d\n", 
+           mergeResult.executionTime, mergeResult.comparisons, mergeResult.swaps);
+
+    printf("Heap Sort:\n");
+    printf("  Tempo: %.7f s | Comp: %d | Trocas: %d\n", 
+           heapResult.executionTime, heapResult.comparisons, heapResult.swaps);
+
+    printf("Radix Sort:\n");
+    printf("  Tempo: %.7f s | Comp: %d | Trocas: %d\n", 
+           radixResult.executionTime, radixResult.comparisons, radixResult.swaps);
     
     free(arr);
     free(bubbleArr);
     free(insertionArr);
     free(selectionArr);
     free(shellArr);
+    free(quickArr);
+    free(mergeArr);
+    free(heapArr);
+    free(radixArr);
 }
 
 int main() {
@@ -242,6 +322,18 @@ int main() {
                 handleSorting(4); // Shell Sort
                 break;
             case 6:
+                handleSorting(5); // Quick Sort
+                break;
+            case 7:
+                handleSorting(6); // Merge Sort
+                break;
+            case 8:
+                handleSorting(7); // Heap Sort
+                break;
+            case 9:
+                handleSorting(8); // Radix Sort
+                break;
+            case 10:
                 compareAlgorithms(); // Compare algorithms
                 break;
             case 0:
